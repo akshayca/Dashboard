@@ -3,16 +3,16 @@ Test Report Dashboard using MERN stack.
 
 ### [Link](https://dev.to/akshayca/build-test-report-dashboard-using-mern-stack-29c) to my Blog.
 
-To the Dashboard App on you machine,
+To run the Dashboard App on you machine,
 
-Clone the repo
+First clone the repo -
 
 ```bash
 $ git clone https://github.com/akshayca/Dashboard.git
 $ cd Dashboard
 ```
 
-Start the app
+Then start the app using Docker
 
 Go to the project directory and run
 
