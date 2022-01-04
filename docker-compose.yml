@@ -1,0 +1,51 @@
+version: '3'
+services:
+  react-app:
+    image: react-frontend-app
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - dashboardapp
+    # volumes:
+    #   - ./:/usr/src/app
+    #   - /usr/src/app/node_modules
+  node-app:
+    image: react-app
+    env_file: ./backend/.env
+    ports:
+      - "5000:5000"
+    networks:
+      - dashboardapp
+    # volumes:
+    #   - ./backend/:/usr/src/app
+    #   - /usr/src/app/node_modules
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+     - 27017:27017
+    # environment:
+    #  - MONGO_INITDB_ROOT_USERNAME=admin
+    #  - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - dashboardapp
+    volumes:
+     - mongo-data:/data/db
+  mongo-express:  
+    image: mongo-express
+    ports:
+     - 8081:8081
+    networks:
+      - dashboardapp
+    environment:
+    #  - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+    #  - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+     - ME_CONFIG_MONGODB_SERVER=mongodb
+networks:
+  dashboardapp:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
